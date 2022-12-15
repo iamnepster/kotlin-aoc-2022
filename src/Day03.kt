@@ -1,47 +1,26 @@
 import java.io.File
 
+fun Char.toScore(): Int {
+    return if (this.isUpperCase()) this - 'A' + 27 else this - 'a' + 1
+}
+
+fun partOne(data: String): Int = data.lines()
+    .map { it.substring(0 until it.length / 2) to it.substring(it.length / 2) }
+    .flatMap { it.first.toSet() intersect it.second.toSet() }
+    .sumOf { it.toScore() }
+
+fun partTwo(data: String): Int = data.lines()
+    .chunked(3)
+    .map { elfGroup ->
+        elfGroup.zipWithNext()
+            .map { (first, second) -> first.toSet() intersect second.toSet() }
+    }
+    .flatMap { it[0] intersect it[1] }
+    .sumOf { it.toScore() }
+
 fun main() {
     val testData = File("src/Day03-Test.txt").readText()
     val data = File("src/Day03.txt").readText()
-
-    fun findSimilarChar(s1: String, s2: String): Char {
-        s1.forEach { if (s2.contains(it)) return it }
-        return ' '
-    }
-
-    fun findSimilarChar(s1: String, s2: String, s3: String): Char {
-        if (s1.length < s2.length && s1.length < s3.length) {
-            s1.forEach {
-                if (s2.contains(it) && s3.contains(it)) return it
-            }
-        }
-        if (s2.length < s1.length && s2.length < s3.length) {
-            s2.forEach {
-                if (s1.contains(it) && s3.contains(it)) return it
-            }
-        }
-        s3.forEach {
-            if (s1.contains(it) && s2.contains(it)) return it
-        }
-        return ' '
-    }
-
-    fun getPointsForChar(char: Char): Int {
-        val charCode = char.toInt()
-        return if (charCode in 65..90) charCode - 38
-        else charCode - 96
-    }
-
-    fun partOne(data: String): Int = data.lines()
-        .map { Pair(it.substring(0, it.length / 2), it.substring(it.length / 2)) }
-        .map { findSimilarChar(it.first, it.second) }
-        .sumOf { getPointsForChar(it) }
-
-    println(testData.lines().windowed(3, 3))
-    fun partTwo(data: String): Int = data.lines()
-        .windowed(3, 3)
-        .map { findSimilarChar(it[0],it[1],it[2]) }
-        .sumOf { getPointsForChar(it) }
 
     check(partOne(testData) == 157)
     println(partOne(data))
