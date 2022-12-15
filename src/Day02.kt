@@ -70,14 +70,12 @@ fun main() {
     fun partOne(data: String): Int =
         data.lines()
             .map { it.split(" ") }
-            .map { it[1].toRoshambo().match(it[0].toRoshambo())}
-            .sum()
+            .sumOf { it[1].toRoshambo().match(it[0].toRoshambo()) }
 
     fun partTwo(data: String): Int =
         data.lines()
             .map { it.split(" ") }
-            .map { it[0].toRoshambo().wantedOutcome(it[1]).match(it[0].toRoshambo()) }
-            .sum()
+            .sumOf { it[0].toRoshambo().wantedOutcome(it[1]).match(it[0].toRoshambo()) }
 
     check(partOne(testData) == 15)
     println(partOne(data))
