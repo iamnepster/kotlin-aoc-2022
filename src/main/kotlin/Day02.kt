@@ -64,8 +64,8 @@ fun String.toRoshambo(): Roshambo =
     else throw IllegalArgumentException("'$this' is Not a valid move!")
 
 fun main() {
-    val testData = File("src/Day02-Test.txt").readText()
-    val data = File("src/Day02.txt").readText()
+    val testData = File("src/main/resources/Day02-Test.txt").readText()
+    val data = File("src/main/resources/Day02.txt").readText()
 
     fun partOne(data: String): Int =
         data.lines()

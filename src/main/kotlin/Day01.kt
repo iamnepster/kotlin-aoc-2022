@@ -1,8 +1,8 @@
 import java.io.File
 
 fun main() {
-    val testData = File("src/Day01-Test.txt").readText()
-    val data = File("src/Day01.txt").readText()
+    val testData = File("src/main/resources/Day01-Test.txt").readText()
+    val data = File("src/main/resources/Day01.txt").readText()
 
     fun partOne(data: String): Int =
         data.split("\n\n")

@@ -13,8 +13,8 @@ private infix fun IntRange.overlaps(other: IntRange): Boolean =
     first <= other.last && other.first <= last
 
 fun main() {
-    val testData = File("src/Day04-Test.txt").readText().lines()
-    val data = File("src/Day04.txt").readText().lines()
+    val testData = File("src/main/resources/Day04-Test.txt").readText().lines()
+    val data = File("src/main/resources/Day04.txt").readText().lines()
 
     fun solvePartOne(data: List<String>): Int = data
         .map { it.asRanges() }

@@ -5,8 +5,8 @@ private fun Char.toScore(): Int {
 }
 
 fun main() {
-    val testData = File("src/Day03-Test.txt").readText().lines()
-    val data = File("src/Day03.txt").readText().lines()
+    val testData = File("src/main/resources/Day03-Test.txt").readText().lines()
+    val data = File("src/main/resources/Day03.txt").readText().lines()
 
     fun partOne(data: List<String>): Int = data
         .map { it.substring(0 until it.length / 2) to it.substring(it.length / 2) }
